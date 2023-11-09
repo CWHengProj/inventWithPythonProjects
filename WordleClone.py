@@ -27,7 +27,7 @@ def coolIntroScreen():
     print(colored("If the correct letter is in the wrong position, it will be highlighted in yellow.",'yellow'))
     print(colored("If the correct letter is in the correct position, it will be highlighted in green.",'green'))
     print(colored("Else, the letters will appear as red.",'red'))
-    print("You have Five attempts. Now that we're clear on the rules, lets begin!")
+    print("You have Six attempts. Now that we're clear on the rules, lets begin!")
 def freshStart():
     #initializes the values again
     attempts=0
