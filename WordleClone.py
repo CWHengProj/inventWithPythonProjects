@@ -48,7 +48,7 @@ def gameOver(attempts,answer):
     return False
 def difficultyGenerator():
     #sets the number of attempts before game over
-    return 5
+    return 6
 def victoryScreen(attempts):
     print(f'Congratulations! You completed the challenge in {attempts} attempts! Well done!')
 def formatter(ans,input):
