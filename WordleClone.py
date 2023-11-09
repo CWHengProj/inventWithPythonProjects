@@ -5,7 +5,7 @@ def main():
     coolIntroScreen()
     attempts,answer=freshStart()
     while True:
-        userInput=input('Please enter a five letter word:()').upper()
+        userInput=input('Please enter a five letter word: ').upper()
         if inputValidator(userInput)== True:
             x,y=formatter(answer,userInput)
             comparator(x,y)
@@ -27,7 +27,7 @@ def coolIntroScreen():
     print(colored("If the correct letter is in the wrong position, it will be highlighted in yellow.",'yellow'))
     print(colored("If the correct letter is in the correct position, it will be highlighted in green.",'green'))
     print(colored("Else, the letters will appear as red.",'red'))
-    print("You have Five attemps. Now that we're clear on the rules, lets begin!")
+    print("You have Five attempts. Now that we're clear on the rules, lets begin!")
 def freshStart():
     #initializes the values again
     attempts=0
@@ -42,7 +42,7 @@ def gameOver(attempts,answer):
     #counts the number of attempts the user has made and serves a game over screen all attempts used up
     print(f'Game over! You have used up all {attempts} attempts!')
     print(f'The correct answer is: {answer}')
-    response =(input('Would you like to play again? Y/N'))
+    response =(input('Would you like to play again? Y/N '))
     if response =='y' or response =='Y' or response =='Yes' or response =='yes':
         return True
     return False
