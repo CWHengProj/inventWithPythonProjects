@@ -1,37 +1,35 @@
-#Guess a 3 digit number. Hints will be given according to your guess.
-#correct digit wrong position
-#correct digit correct position
-#no correct digits
-#add colour code for the hints
-#you have 10 tries.
 #will create a wordle clone once this project is complete.
 from random import randint
+from termcolor import colored
 def main():
     coolIntroScreen()
     attempts,answer=freshStart()
     while True:
         userInput=input('Please enter your guesss from 0 to 999:')
         if inputValidator(userInput)== True:
-            if comparator(formatter(answer,userInput)):
-                victoryScreen()
+            x,y=formatter(answer,userInput)
+            comparator(x,y)
+            if int(answer)==int(userInput):
+                victoryScreen(attempts)
                 exit()
             attempts+=1
             if attempts==difficultyGenerator():
-                if gameOver()==True:
-                    freshStart()
-                    continue
+                if gameOver(attempts)==True:
+                    attempts,answer=freshStart()
                 else:
                     print('Thank you for playing. See you again!')
                     exit()
-            break
 def coolIntroScreen():
     #explains the rules to the player
-    print("Welcome! This is a deductive logic game, where you have to guess a digit from 0 to 999.\n If the correct digit is in the wrong position, it will be highlighted in red.\n If the correct digit is in the correct position, it will be highlighted in green.\n Else, the digits will appear as white.\n Now that we're clear on the rules, lets begin!")
+    print("Welcome! This is a deductive logic game, where you have to guess a digit from 0 to 999.")
+    print(colored("If the correct digit is in the wrong position, it will be highlighted in yellow.",'yellow'))
+    print(colored("If the correct digit is in the correct position, it will be highlighted in green.",'green'))
+    print(colored("Else, the digits will appear as red.",'red'))
+    print("Now that we're clear on the rules, lets begin!")
 def freshStart():
     #initializes the values again
     attempts=0
     answer=randint(1,999)
-    print(answer) #to be removed
     return attempts, answer
 def inputValidator(x):
     #ensure that input is within range and numerical
@@ -51,22 +49,33 @@ def gameOver(attempts):
 def difficultyGenerator():
     #sets the number of attempts before game over
     return 10
-def victoryScreen():
-    #congratulates user once complete, returns number of attempts as well
-    print('hiphiphooray!')
+def victoryScreen(attempts):
+    print(f'Congratulations! You completed the challenge in {attempts} attempts! Well done!')
 def formatter(ans,input):
     #creates a 3 digit format for both answer and user input
-    ansFormatted =(f'{ans:02d}').split()
-    guessFormatter =(f'{input:02d}').split()
-    return ansFormatted, guessFormatter
+    ansFormatted=[]
+    guessFormatted=[]
+    a=('{:02d}'.format(ans))
+    g=('{:03d}'.format(int(input)))
+    for value in a:
+        ansFormatted.append(value)
+    for value in g:
+        guessFormatted.append(value)
+    return ansFormatted, guessFormatted
 def comparator(a,b):
     #creates a comparator to give the user hints with color code
     for i in range(len(a)):
         if b[i]==a[i]:
             #turn the value green
-        if b[i]!=a[i] and b[i] in a:
-            #turn the value orange
-    if a=b:
-        return True
+            b[i]=colored(b[i],'green')
+        elif b[i] in a:
+            #turn the value yellow
+            b[i]=colored(b[i],'yellow')
+        else:
+            b[i]=colored(b[i],'red')
+    #print the 3 values in a box
+    for i in b:
+        print(f"{i}", end="")
+    print('\n')
 if __name__=="__main__":
     main()
